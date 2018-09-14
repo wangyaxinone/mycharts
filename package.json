@@ -1,0 +1,30 @@
+{
+  "name": "mycharts",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack --colors --config webpack.production.js",
+    "dev": "webpack-dev-server --config webpack.development.js"
+  },
+  "keywords": [
+    "charts"
+  ],
+  "author": "wangyaxin",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.0.1",
+    "@babel/preset-env": "^7.0.0",
+    "babel-loader": "^8.0.2",
+    "clean-webpack-plugin": "^0.1.19",
+    "html-webpack-plugin": "^3.2.0",
+    "webpack": "^4.19.0",
+    "webpack-cli": "^3.1.0",
+    "webpack-dev-server": "^3.1.8",
+    "webpack-merge": "^4.1.4"
+  },
+  "dependencies": {
+    "d3": "^5.7.0",
+    "d3-tip": "^0.9.1"
+  }
+}
