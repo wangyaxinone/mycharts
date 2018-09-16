@@ -1,3 +1,4 @@
+//改造自https://x-algo.cn/index.php/2016/03/13/293/，找不到原作者的名字（希望原作者能联系指教），本人进行了一些代码格式、参数外置，bug优化的工作
 import * as d3 from 'd3'
 import d3tip from 'd3-tip'
 export default function yiCun(_this,params){
@@ -378,6 +379,8 @@ export default function yiCun(_this,params){
         }else{
             hasTooltip= true;
         }
+     }else{
+        hasTooltip= true;
      }
      var d_container = d3.select(node_info.container);
      var viewBox = "0,0," + node_info.svg_attr.width + "," +node_info.svg_attr.height;
@@ -478,29 +481,32 @@ export default function yiCun(_this,params){
                 .attr('fill', function(){
                     return node_info.node_list[i].hoverBgColor || 'yellow'
                 })
-            if(_this.evens['mouseover'] && _this.evens['mouseover'].length){
-                _this.evens['mouseover'].forEach(function(fn,idx){
-                    fn(node_info.node_list[i],i);
-                })
-            }
+            _this.emit('mouseover',node_info.node_list[i])    
+            // if(_this.evens['mouseover'] && _this.evens['mouseover'].length){
+            //     _this.evens['mouseover'].forEach(function(fn,idx){
+            //         fn(node_info.node_list[i],i);
+            //     })
+            // }
         })
         .on('click',function(d,i){
-            if(_this.evens['click'] && _this.evens['click'].length){
-                _this.evens['click'].forEach(function(fn,idx){
-                    fn(node_info.node_list[i],i);
-                })
-            }
+            _this.emit('click',node_info.node_list[i])
+            // if(_this.evens['click'] && _this.evens['click'].length){
+            //     _this.evens['click'].forEach(function(fn,idx){
+            //         fn(node_info.node_list[i],i);
+            //     })
+            // }
         })
         .on('mouseout', function(d,i){
             var d_this = d3.select(this).select('rect');
             d_this
                 .attr('fill', hover_color)
             tip.hide()
-            if(_this.evens['mouseout'] && _this.evens['mouseout'].length){
-                _this.evens['mouseout'].forEach(function(fn,idx){
-                    fn(node_info.node_list[i],i);
-                })
-            }
+            _this.emit('mouseout',node_info.node_list[i])
+            // if(_this.evens['mouseout'] && _this.evens['mouseout'].length){
+            //     _this.evens['mouseout'].forEach(function(fn,idx){
+            //         fn(node_info.node_list[i],i);
+            //     })
+            // }
         })
         .append('text')
         .append('tspan')

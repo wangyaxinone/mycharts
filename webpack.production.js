@@ -1,43 +1,42 @@
 var base = require('./webpack.base');
 var merge = require('webpack-merge');
 var CleanWebpackPlugin  = require('clean-webpack-plugin');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
+const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 module.exports = merge(base,{
   output:{
     library: 'myCharts',
     libraryTarget: 'umd',
+    umdNamedDefine: true
   },
+  mode:"production",
+ module:{
+   rules:[
+    {
+      test:/\.css$/,
+      use:[
+        MiniCssExtractPlugin.loader,
+        'css-loader'
+      ]
+    }
+   ]
+ },
   plugins:[
-    new CleanWebpackPlugin('dist')
+    new CleanWebpackPlugin('dist'),
+    new MiniCssExtractPlugin({
+        filename: "myCharts.css",
+        //chunkFilename: "[id].[hash:6].css"
+    }),
   ],
-  // optimization: {
-  //   runtimeChunk: {
-  //     name: 'manifest'
-  //   },
-  //   // minimizer: true, // [new UglifyJsPlugin({...})]
-  //   splitChunks:{
-  //     chunks: 'async',
-  //     minSize: 30000,
-  //     minChunks: 1,
-  //     maxAsyncRequests: 5,
-  //     maxInitialRequests: 3,
-  //     name: true,
-  //     cacheGroups: {
-  //       vendor: {
-  //         name: 'vendor',
-  //         chunks: 'initial',
-  //         priority: -10,
-  //         reuseExistingChunk: false,
-  //         test: /node_modules\/(.*)\.js/
-  //       },
-  //       styles: {
-  //         name: 'styles',
-  //         test: /\.(scss|css)$/,
-  //         chunks: 'all',
-  //         minChunks: 1,
-  //         reuseExistingChunk: true,
-  //         enforce: true
-  //       }
-  //     }
-  //   }
-  // }
+  optimization: {
+    minimizer: [
+        new UglifyJsPlugin({
+          // cache: true,
+          parallel: true,
+          // sourceMap: true // set to true if you want JS source maps
+        }),
+        new OptimizeCSSAssetsPlugin({})
+    ]
+  },
 })

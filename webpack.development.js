@@ -16,6 +16,17 @@ module.exports = merge(base,{
     hot: true,
     hotOnly: true
   },
+  module:{
+    rules:[
+      {
+        test:/\.css$/,
+        use:[
+          'style-loader',
+          'css-loader'
+        ]
+      }
+    ]
+  },
   plugins: [
     new HtmlWebpackPlugin({
       template:'./index.html'
