@@ -27,8 +27,8 @@ a.setOptions({
     ]
 })
 var node_list = [
-    {id:0,fid:0,word:'测试0',post:'test1',dep_type:'TEST1',bgColor:'red'},
-    {id:1,fid:0,word:'测试1',post:'test2',dep_type:'TEST2'}
+    {id:0,fid:0,word:'测试0',post:'test1',dep_type:'TEST1',bgColor:'rgb(31, 119, 180)',color:'#fff'},
+    {id:1,fid:0,word:'测试1',post:'test2',dep_type:'TEST2',bgColor:'rgb(31, 119, 180)',color:'#fff'}
 ];
 var d2 = new myCharts('#d2');
 d2.setOptions({
