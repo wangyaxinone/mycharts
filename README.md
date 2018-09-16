@@ -4,7 +4,7 @@
 >### 使用方法:
 >1. npm i -S mycharts
 >2. import myCharts from "mycharts"
->   require('mycharts/dist/myCharts.css');
+>3. require('mycharts/dist/myCharts.css');
 >   ```
 >   var node_list = [
 >        {id:0,fid:0,word:'测试0',post:'test1',dep_type:'TEST1',color:'#333',bgColor:'red'},
